@@ -1,4 +1,4 @@
-.tasks {
+.task {
   width: 92%;
   max-width: 52rem;
   margin-top: 4rem;
@@ -7,9 +7,14 @@
   justify-content: space-between;
 }
 
-.tasks span {
-    display: flex;
-    font-weight: bold;
+.task span {
+  display: flex;
+  font-weight: bold;
+}
+
+.taskList {
+  width: 92%;
+  max-width: 52rem;
 }
 
 .header {
