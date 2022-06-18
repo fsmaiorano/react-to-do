@@ -1,20 +1,11 @@
-import styles from "./Task.module.css";
-import TaskList from "./TaskList";
+interface TaskProps {
+  content: string;
+}
 
-export default function Task() {
+export default function Task({ content }: TaskProps) {
   return (
     <>
-      <section className={styles.task}>
-        <span className={styles.header}>
-          Tarefas criadas<span className={styles.counter}>0</span>
-        </span>
-        <span className={styles.header}>
-          Concluídas<span className={styles.counter}>0</span>
-        </span>
-      </section>
-      <main className={styles.taskList}>
-        <TaskList />
-      </main>
+      <p>{content}</p>
     </>
   );
 }

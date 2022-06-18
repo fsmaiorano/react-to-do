@@ -1,9 +1,8 @@
-import Task from "./components/task/Task";
 import Header from "./components/header/Header";
 import Search from "./components/search/Search";
+import Board from "./components/board/Board";
 
 import "./global.css";
-
 import styles from "./App.module.css";
 
 function App() {
@@ -12,7 +11,7 @@ function App() {
       <Header />
       <div className={styles.wrapper}>
         <Search />
-        <Task />
+        <Board />
       </div>
     </>
   );
