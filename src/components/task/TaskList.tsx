@@ -1,7 +1,8 @@
-import styles from "./TaskList.module.css";
-import { Trash } from "phosphor-react";
-import clipboard from "../../assets/clipboard.svg";
 import Task from "./Task";
+
+import clipboard from "../../assets/clipboard.svg";
+
+import styles from "./TaskList.module.css";
 
 export default function TaskList() {
   const tasks = [
@@ -26,7 +27,9 @@ export default function TaskList() {
     <section className={styles.taskList}>
       <>
         {tasks && tasks.length > 0 ? (
-          tasks.map((task) => <Task key={task.id} content={task.content} />)
+          tasks.map((task) => (
+            <Task key={task.id} id={task.id.toString()} content={task.content} />
+          ))
         ) : (
           <div>
             <img src={clipboard} />

@@ -1,0 +1,83 @@
+.task {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 4.5rem;
+  padding: 1rem;
+
+  background-color: var(--gray-500);
+  border: 1px solid var(--gray-400);
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+}
+
+.task + .task {
+  margin-top: 1rem;
+}
+
+.task p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  color: var(--gray-100);
+}
+
+.task button {
+  background-color: transparent;
+  border: none;
+  color: var(--gray-300);
+}
+
+.task button:hover {
+  color: var(--red-500);
+  cursor: pointer;
+}
+
+/* Checkbox */
+.task .checkboxRounded {
+  position: relative;
+}
+
+.task .checkboxRounded label {
+  background-color: transparent;
+  border: 2px solid var(--blue-400);
+  border-radius: 50%;
+  cursor: pointer;
+  height: 1.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1.5rem;
+}
+
+.task .checkboxRounded label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 6px;
+  left: 4px;
+  opacity: 0;
+  position: absolute;
+  top: 5px;
+  transform: rotate(-45deg);
+  width: 12px;
+}
+
+.task .checkboxRounded input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.task .checkboxRounded input[type="checkbox"]:checked + label {
+  background-color: var(--purple-500);
+  border-color: var(--purple-500);
+}
+
+.task .checkboxRounded input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
