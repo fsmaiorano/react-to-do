@@ -7,7 +7,6 @@ import styles from "./Board.module.css";
 
 export default function Board() {
   const [newTaskText, setNewTaskText] = useState("");
-  const [openedTasksCounter, setOpenedTasksCounter] = useState<number>(0);
   const [closedTasksCounter, setClosedTasksCounter] = useState<number>(0);
   const [tasks, setTasks] = useState<ITaskProps[]>([]);
 
@@ -18,7 +17,6 @@ export default function Board() {
       { id: tasks.length + 1, content: newTaskText, isDone: false },
     ]);
     setNewTaskText("");
-    setOpenedTasksCounter(openedTasksCounter + 1);
   }
 
   function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
@@ -32,10 +30,6 @@ export default function Board() {
 
   function handleTasksChange(tasks: ITaskProps[]) {
     setTasks(tasks);
-  }
-
-  function handleOpenedTasksCounter(counter: number) {
-    setOpenedTasksCounter(counter);
   }
 
   function handleClosedTasksCounter(counter: number) {
@@ -65,19 +59,21 @@ export default function Board() {
         </form>
       </section>
       <section className={styles.boardSection}>
-        <span className={styles.header}>
-          Tarefas criadas
-          <span className={styles.counter}>{openedTasksCounter}</span>
-        </span>
-        <span className={styles.header}>
-          Concluídas<span className={styles.counter}>{closedTasksCounter}</span>
-        </span>
+        <div className={styles.header}>
+          <span>Tarefas criadas</span>
+          <span className={styles.counter}>{tasks.length}</span>
+        </div>
+        <div className={styles.header}>
+          <span>Concluídas</span>
+          <span className={styles.counterLarge}>
+            {closedTasksCounter} de {tasks.length}
+          </span>
+        </div>
       </section>
       <main className={styles.content}>
         <TaskList
           tasks={tasks}
           onTasksChange={handleTasksChange}
-          openedTasksCounter={handleOpenedTasksCounter}
           closedTasksCounter={handleClosedTasksCounter}
         />
       </main>

@@ -7,14 +7,12 @@ import styles from "./TaskList.module.css";
 export interface ITaskListProps {
   tasks: ITaskProps[];
   onTasksChange: (tasks: ITaskProps[]) => void;
-  openedTasksCounter: (counter: number) => void;
   closedTasksCounter: (counter: number) => void;
 }
 
 export default function TaskList({
   tasks,
   onTasksChange,
-  openedTasksCounter,
   closedTasksCounter,
 }: ITaskListProps) {
   useEffect(() => {
@@ -22,14 +20,10 @@ export default function TaskList({
   }, []);
 
   function handleTasksCounter(tasks: ITaskProps[]) {
-    let openedTasks = tasks.filter((task) => !task.isDone).length;
     let closedTasks = tasks.filter((task) => task.isDone).length;
-
-    if (openedTasks === undefined) openedTasks = 0;
 
     if (closedTasks === undefined) closedTasks = 0;
 
-    openedTasksCounter(openedTasks);
     closedTasksCounter(closedTasks);
   }
 

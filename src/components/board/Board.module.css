@@ -62,7 +62,7 @@
   justify-content: space-between;
 }
 
-.boardSection span {
+.boardSection div {
   display: flex;
   font-weight: bold;
 }
@@ -86,8 +86,22 @@
 
   background-color: var(--gray-400);
   border-radius: 999px;
-  width: 25px;
-  height: 19px;
+  width: 30px;
+  height: 20px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.counterLarge {
+  margin-left: 0.5rem;
+  color: var(--white);
+
+  background-color: var(--gray-400);
+  border-radius: 999px;
+
+  height: 20px;
+  width: 5rem;
 
   display: flex;
   justify-content: center;
