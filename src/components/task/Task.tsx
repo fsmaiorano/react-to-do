@@ -1,7 +1,7 @@
 import styles from "./Task.module.css";
 import { Trash } from "phosphor-react";
 
-interface TaskProps {
+export interface ITaskProps {
   id: number;
   content: string;
   isDone: boolean;
@@ -15,7 +15,7 @@ export default function Task({
   content,
   onDeleteTask,
   onCheckedTask,
-}: TaskProps) {
+}: ITaskProps) {
   function handleDeleteTask(id: number) {
     onDeleteTask(id);
   }

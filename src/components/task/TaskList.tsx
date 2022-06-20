@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Task from "./Task";
 
 import clipboard from "../../assets/clipboard.svg";
 import styles from "./TaskList.module.css";
 
-export default function TaskList() {
+export interface ITaskListProps {
+  openedTasksCounter: (counter: number) => void;
+  closedTasksCounter: (counter: number) => void;
+}
+
+export default function TaskList({
+  openedTasksCounter,
+  closedTasksCounter,
+}: ITaskListProps) {
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -23,10 +31,28 @@ export default function TaskList() {
     },
   ]);
 
+  useEffect(() => {
+    handleTasksCounter();
+  }, []);
+
+  function handleTasksCounter() {
+    let openedTasksCounter = tasks.filter((task) => !task.isDone).length;
+    let closedTasksCounter = tasks.filter((task) => task.isDone).length;
+
+    if (!openedTasksCounter || openedTasksCounter === undefined)
+      openedTasksCounter = 0;
+
+    if (!closedTasksCounter || closedTasksCounter === undefined)
+      closedTasksCounter = 0;
+
+    openedTasksCounter(openedTasksCounter);
+    closedTasksCounter(closedTasksCounter);
+  }
+
   function deleteTask(id: number) {
-    console.log(id);
     const tasksWithoutDeletedOne = tasks.filter((task) => task.id !== id);
     setTasks(tasksWithoutDeletedOne);
+    handleTasksCounter();
   }
 
   function isCheckedTask(id: number, isDone: boolean) {
