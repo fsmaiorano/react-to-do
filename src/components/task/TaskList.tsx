@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Task from "./Task";
+import Task, { ITaskProps } from "./Task";
 
 import clipboard from "../../assets/clipboard.svg";
 import styles from "./TaskList.module.css";
@@ -32,31 +32,28 @@ export default function TaskList({
   ]);
 
   useEffect(() => {
-    handleTasksCounter();
+    handleTasksCounter(tasks);
   }, []);
 
-  function handleTasksCounter() {
-    let openedTasksCounter = tasks.filter((task) => !task.isDone).length;
-    let closedTasksCounter = tasks.filter((task) => task.isDone).length;
+  function handleTasksCounter(tasks: ITaskProps[]) {
+    let openedTasks = tasks.filter((task) => !task.isDone).length;
+    let closedTasks = tasks.filter((task) => task.isDone).length;
 
-    if (!openedTasksCounter || openedTasksCounter === undefined)
-      openedTasksCounter = 0;
+    if (openedTasks === undefined) openedTasks = 0;
 
-    if (!closedTasksCounter || closedTasksCounter === undefined)
-      closedTasksCounter = 0;
+    if (closedTasks === undefined) closedTasks = 0;
 
-    openedTasksCounter(openedTasksCounter);
-    closedTasksCounter(closedTasksCounter);
+    openedTasksCounter(openedTasks);
+    closedTasksCounter(closedTasks);
   }
 
   function deleteTask(id: number) {
     const tasksWithoutDeletedOne = tasks.filter((task) => task.id !== id);
     setTasks(tasksWithoutDeletedOne);
-    handleTasksCounter();
+    handleTasksCounter(tasksWithoutDeletedOne);
   }
 
   function isCheckedTask(id: number, isDone: boolean) {
-    debugger;
     const updatedTasks = tasks.map((task) => {
       if (task.id === id) {
         return {
@@ -67,6 +64,7 @@ export default function TaskList({
     });
 
     setTasks(updatedTasks);
+    handleTasksCounter(updatedTasks);
   }
 
   return (

@@ -1,5 +1,5 @@
 import Header from "./components/header/Header";
-import Search from "./components/search/Search";
+import Form from "./components/form/Form";
 import Board from "./components/board/Board";
 
 import "./global.css";
@@ -10,7 +10,7 @@ function App() {
     <>
       <Header />
       <div className={styles.wrapper}>
-        <Search />
+        <Form />
         <Board />
       </div>
     </>

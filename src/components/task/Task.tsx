@@ -5,8 +5,8 @@ export interface ITaskProps {
   id: number;
   content: string;
   isDone: boolean;
-  onDeleteTask: (id: number) => void;
-  onCheckedTask: (id: number, isDone: boolean) => void;
+  onDeleteTask?: (id: number) => void;
+  onCheckedTask?: (id: number, isDone: boolean) => void;
 }
 
 export default function Task({
@@ -17,11 +17,11 @@ export default function Task({
   onCheckedTask,
 }: ITaskProps) {
   function handleDeleteTask(id: number) {
-    onDeleteTask(id);
+    onDeleteTask!(id);
   }
 
   function handleCheckedTask(id: number, isDone: boolean) {
-    onCheckedTask(id, !isDone);
+    onCheckedTask!(id, !isDone);
   }
 
   return (
