@@ -4,16 +4,8 @@ import TaskList from "../task/TaskList";
 import styles from "./Board.module.css";
 
 export default function Board() {
-  const [newTaskText, setNewTaskText] = useState("");
   const [openedTasksCounter, setOpenedTasksCounter] = useState<number>(0);
   const [closedTasksCounter, setClosedTasksCounter] = useState<number>(0);
-
-  const isNewTaskInputEmpty = newTaskText.length === 0 ? true : false;
-
-  function handleCreateNewTask(event: FormEvent) {
-    event.preventDefault();
-    setNewTaskText("");
-  }
 
   function handleOpenedTasksCounter(counter: number) {
     setOpenedTasksCounter(counter);
@@ -26,9 +18,9 @@ export default function Board() {
   return (
     <>
       <section role="form" className={styles.formSection}>
-        <form className={styles.form} onSubmit={handleCreateNewTask}>
+        <form className={styles.form}>
           <input type="form" placeholder="Adicione uma nova tarefa" />
-          <button type="submit" disabled={isNewTaskInputEmpty}>
+          <button type="submit">
             Criar
             <PlusCircle size={16} />
           </button>
@@ -45,7 +37,6 @@ export default function Board() {
       </section>
       <main className={styles.content}>
         <TaskList
-          onNewTask={newTaskText}
           openedTasksCounter={handleOpenedTasksCounter}
           closedTasksCounter={handleClosedTasksCounter}
         />
