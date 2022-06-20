@@ -50,6 +50,7 @@
 
 .form button[type="submit"]:hover {
   background-color: var(--blue-400);
+  cursor: pointer;
 }
 
 .boardSection {

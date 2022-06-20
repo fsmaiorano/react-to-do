@@ -5,32 +5,18 @@ import clipboard from "../../assets/clipboard.svg";
 import styles from "./TaskList.module.css";
 
 export interface ITaskListProps {
+  tasks: ITaskProps[];
+  onTasksChange: (tasks: ITaskProps[]) => void;
   openedTasksCounter: (counter: number) => void;
   closedTasksCounter: (counter: number) => void;
 }
 
 export default function TaskList({
+  tasks,
+  onTasksChange,
   openedTasksCounter,
   closedTasksCounter,
 }: ITaskListProps) {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      content: "Take a showe",
-      isDone: false,
-    },
-    {
-      id: 2,
-      content: "Make a todo list",
-      isDone: false,
-    },
-    {
-      id: 3,
-      content: "Cook a meal",
-      isDone: true,
-    },
-  ]);
-
   useEffect(() => {
     handleTasksCounter(tasks);
   }, []);
@@ -49,8 +35,8 @@ export default function TaskList({
 
   function deleteTask(id: number) {
     const tasksWithoutDeletedOne = tasks.filter((task) => task.id !== id);
-    setTasks(tasksWithoutDeletedOne);
     handleTasksCounter(tasksWithoutDeletedOne);
+    onTasksChange(tasksWithoutDeletedOne);
   }
 
   function isCheckedTask(id: number, isDone: boolean) {
@@ -63,8 +49,8 @@ export default function TaskList({
       } else return task;
     });
 
-    setTasks(updatedTasks);
     handleTasksCounter(updatedTasks);
+    onTasksChange(updatedTasks);
   }
 
   return (
