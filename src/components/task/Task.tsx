@@ -4,21 +4,38 @@ import { Trash } from "phosphor-react";
 interface TaskProps {
   id: number;
   content: string;
+  isDone: boolean;
   onDeleteTask: (id: number) => void;
+  onCheckedTask: (id: number, isDone: boolean) => void;
 }
 
-export default function Task({ id, content, onDeleteTask }: TaskProps) {
+export default function Task({
+  id,
+  isDone,
+  content,
+  onDeleteTask,
+  onCheckedTask,
+}: TaskProps) {
   function handleDeleteTask(id: number) {
     onDeleteTask(id);
+  }
+
+  function handleCheckedTask(id: number, isDone: boolean) {
+    onCheckedTask(id, !isDone);
   }
 
   return (
     <article className={styles.task}>
       <div className={styles.checkboxRounded}>
-        <input type="checkbox" id={id.toString()} />
+        <input
+          type="checkbox"
+          defaultChecked={isDone}
+          id={id.toString()}
+          onChange={() => handleCheckedTask(id, isDone)}
+        />
         <label htmlFor={id.toString()}></label>
       </div>
-      <p>{content}</p>
+      <p className={isDone ? styles.isDone : ""}>{content}</p>
       <button onClick={() => handleDeleteTask(id)}>
         <Trash size={20} />
       </button>

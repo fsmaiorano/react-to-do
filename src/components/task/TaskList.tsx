@@ -1,9 +1,8 @@
+import { useState } from "react";
 import Task from "./Task";
 
 import clipboard from "../../assets/clipboard.svg";
-
 import styles from "./TaskList.module.css";
-import { useState } from "react";
 
 export default function TaskList() {
   const [tasks, setTasks] = useState([
@@ -30,6 +29,20 @@ export default function TaskList() {
     setTasks(tasksWithoutDeletedOne);
   }
 
+  function isCheckedTask(id: number, isDone: boolean) {
+    debugger;
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return {
+          ...task,
+          isDone,
+        };
+      } else return task;
+    });
+
+    setTasks(updatedTasks);
+  }
+
   return (
     <section className={styles.taskList}>
       <>
@@ -38,8 +51,10 @@ export default function TaskList() {
             <Task
               key={task.id}
               id={task.id}
+              isDone={task.isDone}
               content={task.content}
               onDeleteTask={deleteTask}
+              onCheckedTask={isCheckedTask}
             />
           ))
         ) : (
