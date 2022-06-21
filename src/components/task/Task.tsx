@@ -35,7 +35,7 @@ export default function Task({
         />
         <label htmlFor={id.toString()}></label>
       </div>
-      <p className={isDone ? styles.isDone : ""}>{content}</p>
+      <p className={isDone ? styles.isDone : ""} >{content}</p>
       <button onClick={() => handleDeleteTask(id)}>
         <Trash size={20} />
       </button>
